@@ -1,0 +1,173 @@
+@CHARSET "UTF-8";
+
+body {
+	font-family: Arial;
+	margin: 0;
+	padding: 0;
+}
+
+#mainDiv {
+	max-width: 1000px;
+	min-width: 800px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#topBanner {
+	display: table;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#logoImg {
+	display: table-cell;
+	text-align: left;
+	vertical-align: middle;
+}
+
+#naviDiv {
+	display: table-cell;
+	text-align: right;
+	vertical-align: middle;
+}
+
+#naviDiv ul {
+	padding-left: 0;
+	margin-bottom: 0;
+	list-style: none;
+}
+
+#naviDiv ul li {
+	position: relative;
+	display: inline-block;
+}
+
+#naviDiv ul li a {
+	padding: 10px 15px;
+}
+
+#naviDiv ul li a:hover, #naviDiv ul li a:focus {
+	text-decoration: none;
+}
+
+#naviLogin a {
+	text-decoration: none;
+}
+
+#naviLogin:hover, #naviLogin:focus {
+	opacity: 0.75;
+}
+
+#headerDiv {
+	display: table;
+	width: 100%;
+}
+
+#headerCellLeft {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: left;
+	line-height: 50px;
+	padding-left: 10px;
+}
+
+#headerCellSpan01 {
+	font-weight: bold;
+	font-style: italic;
+	font-size: 1.3em;
+}
+
+#headerCellSpan02 {
+	font-size: 1.1em;
+}
+
+#headerCellRight {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: right;
+	padding-right: 10px;
+}
+
+#contentDiv {
+	display: table;
+	width: 100%;
+}
+
+#leftDiv {
+	width: 220px;
+	display: table-cell;
+	vertical-align: top;
+	text-align: center;
+	padding: 5px;
+	height: 450px;
+}
+
+#centerDiv {
+	display: table-cell;
+	vertical-align: top;
+	padding: 5px;
+	height: 450px;
+}
+
+#rightDiv {
+	width: 220px;
+	display: table-cell;
+	vertical-align: top;
+	text-align: center;
+	padding: 5px;
+	height: 450px;
+}
+
+#footerDiv {
+	color: black;
+	text-align: center;
+	padding: 5px;
+}
+
+#checkboxesDiv label {
+	padding-right: 15px;
+}
+
+#formInput {
+	position:absolute;
+    top:  200px;
+    left: 500px;
+	width:375px;
+	height:370px;
+	z-index: 9002;
+   	border-style: solid;
+    border-color: blue;
+}
+
+ #result {
+	position:absolute;
+    top:  50px;
+    left: 500px;
+	background-color:LightBlue;	
+	width:375px;
+	height:175px;
+	z-index: 9002;
+   	border-style: solid;
+    border-color: blue;
+}
+
+.h2Error {
+	text-align: center;
+	color: red;
+}
+
+.formErrorInfo {
+	color: red;
+}
+
+.form-group {
+	padding: 10px;
+}
+
+#centerDiv h2 {
+	text-align: center;
+	padding: 0;
+	margin: 5px;
+}

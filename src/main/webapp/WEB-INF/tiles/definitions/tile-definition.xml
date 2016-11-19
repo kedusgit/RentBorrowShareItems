@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	
+	<definition name="baseLayout" template="/WEB-INF/tiles/template/baseLayout.jsp">
+		<put-attribute name="title" value="Point of Sale (POS)" />
+ 		<put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
+ 		<put-attribute name="header" value="/WEB-INF/tiles/template/header.jsp" />
+ 		<put-attribute name="left" value="" />
+		<put-attribute name="center" value="" />
+		<put-attribute name="right" value="" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+	</definition>
+	
+	<definition name="login-definition" template="/WEB-INF/tiles/template/loginLayout.jsp">
+	</definition>
+	
+	<definition name="login" extends="login-definition">
+    	<put-attribute name="content"   value="/WEB-INF/views/login.jsp"/>       
+    </definition>
+	
+	<definition name="register" extends="baseLayout">
+		<put-attribute name="content"   value="/WEB-INF/views/register.jsp"/> 
+	</definition>
+
+	<definition name="posErrorPage" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/errorPage.jsp" />
+	</definition>
+	
+	<definition name="locations" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/locations.jsp" />
+	</definition>
+	
+	<definition name="home" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/home.jsp"/> 
+	</definition>
+	
+	<definition name="home2" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/home2.jsp"/> 
+	</definition>
+	
+	<definition name="editLocation" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/editLocation.jsp" />
+	</definition>
+	
+	<definition name="receivings" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/receivings.jsp" />
+	</definition>
+	
+	<definition name="addReceiving" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/addReceiving.jsp" />
+	</definition>
+	
+	<definition name="editReceiving" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/editReceiving.jsp" />
+	</definition>
+	
+	<definition name="stores" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/stores.jsp" />
+	</definition>
+	
+	<definition name="addStore" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/addStore.jsp" />
+	</definition>
+	
+	<definition name="editStore" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/editStore.jsp" />
+	</definition>
+	
+	<definition name="category" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/category.jsp" />
+	</definition>
+	
+	<definition name="products" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/products.jsp" />
+	</definition>
+	
+	<definition name="addProduct" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/addProduct.jsp" />
+	</definition>
+	
+	<definition name="editProduct" extends="baseLayout">
+ 		<put-attribute name="center" value="/WEB-INF/views/editProduct.jsp" />
+	</definition>
+	
+	<definition name="sales" extends="baseLayout">
+		<put-attribute name="content"   value="/WEB-INF/views/sales.jsp"/> 
+	</definition>
+
+</tiles-definitions>
