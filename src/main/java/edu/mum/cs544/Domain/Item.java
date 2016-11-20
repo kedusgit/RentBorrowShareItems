@@ -1,8 +1,11 @@
 package edu.mum.cs544.Domain;
 
-import java.io.Serializable;
 
+
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,21 +13,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+
 @Entity
 @Table(name = "item", catalog = "cs544db")
-public class Item implements Serializable {
+public class Item {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue
 	private int itemId;
 	private String itemName;
 	private String itemDescription;
 	private double itemPrice;
-	@Enumerated
+	@ElementCollection
+	@Enumerated(EnumType.STRING)
 	private ItemCategory itemCategory;
 	@Enumerated
 	private ItemStatus itemStatus;
@@ -112,3 +115,4 @@ public class Item implements Serializable {
 	}
 
 }
+
