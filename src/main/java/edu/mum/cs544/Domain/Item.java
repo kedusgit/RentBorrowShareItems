@@ -6,8 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "item", catalog = "cs544db")
 public class Item implements Serializable {
 
 	/**
@@ -27,7 +31,13 @@ public class Item implements Serializable {
 	private int itemQuantity;
 	// lend /rent for (x) # of days
 	private int numofDays;
+	@ManyToOne
+	@JoinColumn(name = "userId")
 	private User owner;
+
+	public Item() {
+
+	}
 
 	public int getItemId() {
 		return itemId;
