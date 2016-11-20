@@ -15,8 +15,14 @@ import javax.persistence.Table;
 public class Authorities implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	@Id
+	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 	private String authority;
 
@@ -28,9 +34,7 @@ public class Authorities implements java.io.Serializable {
 		this.authority = authority;
 	}
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	
 	public Integer getId() {
 		return this.id;
 	}
@@ -39,8 +43,7 @@ public class Authorities implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userId", nullable = false)
+	
 	public User getUser() {
 		return this.user;
 	}

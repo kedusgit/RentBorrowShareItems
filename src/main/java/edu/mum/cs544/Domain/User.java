@@ -1,15 +1,23 @@
 package edu.mum.cs544.Domain;
 
+
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+
+import org.hibernate.validator.constraints.Email;
+
+
 
 @Entity
 @Table(name = "user", catalog = "cs544db")
@@ -17,16 +25,31 @@ public class User implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	
+	@Id
+	@GeneratedValue
 	private Integer userId;
+	
+	
 	private String username;
 	private String password;
 	private String verifyPassword;
+	@NotNull(message="first name required")
 	private String firstName;
+	@NotNull(message="last name required")
 	private String lastName;
 	private Integer gender;
+	@NotNull(message="email can not be empty")
+	@Email(message="email format not matched")
 	private String email;
 	private boolean enabled;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private List<Authorities> authoritieses;
+	@Embedded
+	private Address address;
+	
+	
+	@OneToMany(mappedBy="owner")
 	private List<Item> items;
 
 	public User() {
@@ -51,8 +74,7 @@ public class User implements java.io.Serializable {
 		this.authoritieses = authoritieses;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	@Column(name = "userId", unique = true, nullable = false)
 	public Integer getUserId() {
 		return this.userId;
@@ -133,8 +155,7 @@ public class User implements java.io.Serializable {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	
 	public List<Authorities> getAuthoritieses() {
 		return this.authoritieses;
 	}
@@ -143,7 +164,7 @@ public class User implements java.io.Serializable {
 		this.authoritieses = authoritieses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	
 	public List<Item> getItems() {
 		return this.items;
 	}

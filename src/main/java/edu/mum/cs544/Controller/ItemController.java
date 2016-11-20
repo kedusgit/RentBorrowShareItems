@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.cs544.Domain.Item;
+import edu.mum.cs544.Domain.ItemCategory;
 import edu.mum.cs544.Service.ItemService;
 
 @Controller
@@ -40,9 +41,10 @@ public class ItemController {
 		return "items";
 	}
 
-	@RequestMapping("/{type}")
-	public @ResponseBody Item getItemById(@PathVariable("type") String type, Model model) {
-		Item item = (Item) itemService.getItemByType(type);
+	@RequestMapping("/{itemCategory}")
+	public @ResponseBody Item getItemById(@PathVariable("itemCategory") ItemCategory itemCategory, Model model) {
+	//	ItemCategory newType = ItemCategory.ACCESSORIES;
+		Item item = (Item) itemService.getItemByItemCatagory(itemCategory);
 		model.addAttribute("item", item);
 		return item;
 	}

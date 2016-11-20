@@ -103,8 +103,9 @@
 			<version>2.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-jpamodelgen</artifactId>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-core</artifactId>
+			<version>8.2.4.Final</version>
 		</dependency>
 	</dependencies>
 
