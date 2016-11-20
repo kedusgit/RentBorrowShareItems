@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.mum.cs544.Domain.UserAutentication;
+import edu.mum.cs544.Domain.User;
 import edu.mum.cs544.Service.UserService;
 
 
@@ -27,12 +27,12 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/register", method = RequestMethod.GET)
-	public String register(@ModelAttribute("loginUser") UserAutentication user) {
+	public String register(@ModelAttribute("loginUser") User user) {
  		return "register";
 	}
 	
 	@RequestMapping(value="/register", method = RequestMethod.POST)
-	public String add(@Valid @ModelAttribute("loginUser") UserAutentication user, BindingResult result, 
+	public String add(@Valid @ModelAttribute("loginUser") User user, BindingResult result, 
 			RedirectAttributes redirectAttr) {
 		if(result.hasErrors()) {
 			return "register";
@@ -44,7 +44,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/loginfailed", method = RequestMethod.GET)
-	public String loginerror(@ModelAttribute("loginUser") UserAutentication user, Model model) {
+	public String loginerror(@ModelAttribute("loginUser") User user, Model model) {
  
 		model.addAttribute("error", "true");
 		return "login";

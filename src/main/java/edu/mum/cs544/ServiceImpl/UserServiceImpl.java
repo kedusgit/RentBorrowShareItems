@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.mum.cs544.Domain.UserAutentication;
+import edu.mum.cs544.Domain.User;
 import edu.mum.cs544.Repository.UserRepository;
 import edu.mum.cs544.Service.UserService;
 
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-  	public void save(UserAutentication user) {
+  	public void save(User user) {
 
   		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();   		
   		String encodedPassword = passwordEncoder.encode(user.getPassword());
@@ -31,12 +31,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserAutentication> findAll() {	
-		return (List<UserAutentication>) userRepository.findAll();
+	public List<User> findAll() {	
+		return (List<User>) userRepository.findAll();
 	}
 
 	@Override
-	public UserAutentication findByUsername(String username) {
+	public User findByUsername(String username) {
 		// TODO Auto-generated method stub
 		return null;
 	}

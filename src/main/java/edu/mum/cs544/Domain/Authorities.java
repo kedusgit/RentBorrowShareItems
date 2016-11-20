@@ -17,13 +17,13 @@ public class Authorities implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private UserAutentication user;
+	private User user;
 	private String authority;
 
 	public Authorities() {
 	}
 
-	public Authorities(UserAutentication user, String authority) {
+	public Authorities(User user, String authority) {
 		this.user = user;
 		this.authority = authority;
 	}
@@ -41,11 +41,11 @@ public class Authorities implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userId", nullable = false)
-	public UserAutentication getUser() {
+	public User getUser() {
 		return this.user;
 	}
 
-	public void setUser(UserAutentication user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
