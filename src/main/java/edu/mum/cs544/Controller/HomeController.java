@@ -17,10 +17,10 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = {"/demo"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public String home() {
-
-		return "demo";
+		System.out.println("home called");
+		return "home";
 	}	
 
 }
