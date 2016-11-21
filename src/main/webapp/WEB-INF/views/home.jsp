@@ -12,14 +12,18 @@
 </head>
 <body>
 	<div id="centerDiv">
-	<h1>home ds</h1>
+	<h1>home</h1>
+	</div>
 	
 	<div class="col-lg-offset-2 col-lg-10">
 						<a href="<spring:url value="/item/all"/>"
 							class="btn btn-primary"> Show Items</a>
 					</div>
-	
+	<div class="col-lg-offset-2 col-lg-10">
+						<a href="<spring:url value="/item/search"/>"
+							class="btn btn-primary">SEARCH</a>
+					</div>
 		
-	</div>
+	
 </body>
 </html>

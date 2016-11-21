@@ -26,7 +26,7 @@
 								<div class="caption">
 									<h3>${item.itemName}</h3>
 									<p>${item.itemDescription}</p>
-									<p>${item.itemDescription}</p>
+									<p>${item.itemPrice}</p>
 
 									<p>
 										<spring:url value="/item/{itemId}" var="detail">

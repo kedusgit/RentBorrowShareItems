@@ -38,12 +38,12 @@
 				
 				<form:errors path="*" cssClass="alert alert-danger" element="div" />
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="itemId"><spring:message
-							code="additem.form.itemId.label" /></label>
+					<label class="control-label col-lg-2 col-lg-2" for="itemPrice"><spring:message
+							code="additem.form.itemPrice.label" /></label>
 					<div class="col-lg-10">
-						<form:input id="itemId" path="itemId" type="text"
+						<form:input id="itemPrice" path="itemPrice" type="text"
 							class="form:input-large" />
-						<form:errors path="itemId" cssClass="text-danger" />
+						<form:errors path="itemPrice" cssClass="text-danger" />
 					</div>
 				</div>
 				
@@ -60,20 +60,13 @@
 				
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="itemDescription"><spring:message
-							code="additem.form.description.label" /></label>
+							code="additem.form.itemDescription.label" /></label>
 					<div class="col-lg-10">
 						<form:textarea id="itemDescription" path="itemDescription" rows="2" />
 					</div>
 				</div>
 				
 				
-				<div class="form-group">
-					<label class="control-label col-lg-2" for="itemDescription"><spring:message
-							code="additem.form.description.label" /></label>
-					<div class="col-lg-10">
-						<form:textarea id="itemDescription" path="itemDescription" rows="2" />
-					</div>
-				</div>
 				
 				
 				
