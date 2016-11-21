@@ -81,7 +81,7 @@ public class ItemController {
 
 	@RequestMapping(value = "/editItem/{itemId}", method = RequestMethod.POST)
 	public String editResourceFormProcess(@PathVariable("itemId") Integer itemId,
-			@PathVariable("eventId") Integer eventId, Model model, Item item, HttpServletRequest request,
+			Model model, Item item, HttpServletRequest request,
 			RequestAttributes redirectAttributes) {
 		Item editedItem = itemService.getItemId(itemId);
 		editedItem.setItemName(item.getItemName());
