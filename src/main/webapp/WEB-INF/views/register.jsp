@@ -42,16 +42,26 @@
 			 Enter your account details below:
 		</p>
 		<div class="form-group">
-			<form:label path="username" class="control-label visible-ie8 visible-ie9">Username</form:label>
+			<form:label path="username" class="control-label visible-ie8 visible-ie9">UserName</form:label>
 			<form:input path="username" class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
 			<form:errors path="username" cssClass="text-danger"/>
 		</div>
+		
+		
 		<div class="form-group">
 			<form:label path="password" class="control-label visible-ie8 visible-ie9">Password</form:label>
 			<form:input path="password" class="form-control placeholder-no-fix" id="register_password" type="password" autocomplete="off" placeholder="Password" name="password"/>
 			<form:errors path="password" cssClass="text-danger"/>
 			
 		</div>
+		
+		<div class="form-group">
+			<form:label path="verifyPassword" class="control-label visible-ie8 visible-ie9">verifyPassword</form:label>
+			<form:input path="verifyPassword" class="form-control placeholder-no-fix" id="register_password" type="password" autocomplete="off" placeholder="Password" name="verifyPassword"/>
+			<form:errors path="verifyPassword" cssClass="text-danger"/>
+			
+		</div>
+		
 		<div class="form-group">
 			<label class="control-label col-lg-2" for="authority">Role</label>
 			<form:input class="form-control placeholder-no-fix" name="authoritieses[0].authority" path="authoritieses[0].authority" type="text" value="ROLE_USER" />

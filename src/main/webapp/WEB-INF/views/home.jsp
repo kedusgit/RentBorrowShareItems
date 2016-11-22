@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE HTML>
@@ -19,11 +19,26 @@
 						<a href="<spring:url value="/item/all"/>"
 							class="btn btn-primary"> Show Items</a>
 					</div>
+					
+					
+					
+					
+					
 	<div class="col-lg-offset-2 col-lg-10">
 						<a href="<spring:url value="/item/search"/>"
 							class="btn btn-primary">SEARCH</a>
 					</div>
 		
+	
+	<p> 
+					<a href="<spring:url value="/Add" />" class="btn btn-default">
+						<span class="glyphicon-hand-left glyphicon"></span> Add Items
+					</a>
+					
+					<a href="<spring:url value="/home" />" class="btn btn-default">
+						<span class="glyphicon-hand-left glyphicon"></span> Home
+					</a>
+		</p>
 	
 </body>
 </html>
