@@ -6,16 +6,20 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 
@@ -30,24 +34,35 @@ public class User implements java.io.Serializable {
 	@GeneratedValue
 	private Integer userId;
 	
-	
+	@NotEmpty(message="username required")
 	private String username;
+	
+	@NotEmpty(message="password required")
+	@Size(min = 8, message="length must be at least 8")
 	private String password;
+	
+	@NotEmpty(message="required")
 	private String verifyPassword;
-	@NotNull(message="first name required")
+	
+	@NotEmpty(message="first name required")
 	private String firstName;
-	@NotNull(message="last name required")
+	
+	@NotEmpty(message="last name required")
 	private String lastName;
-	private Integer gender;
-	@NotNull(message="email can not be empty")
+	private String gender;
+	@NotEmpty(message="email can not be empty")
 	@Email(message="email format not matched")
 	private String email;
 	private boolean enabled;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private List<Authorities> authoritieses;
+	@Valid
 	@Embedded
 	private Address address;
 	
+	/*@Enumerated(EnumType.STRING)
+	private UserRole role;*/
+	private String role;
 	
 	@OneToMany(mappedBy="owner")
 	private List<Item> items;
@@ -62,7 +77,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String username, String password, String verifyPassword, String firstName, String lastName,
-			Integer gender, String email, boolean enabled, List<Authorities> authoritieses) {
+			String gender, String email, boolean enabled, List<Authorities> authoritieses) {
 		this.username = username;
 		this.password = password;
 		this.verifyPassword = verifyPassword;
@@ -74,7 +89,16 @@ public class User implements java.io.Serializable {
 		this.authoritieses = authoritieses;
 	}
 
-	
+		
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	@Column(name = "userId", unique = true, nullable = false)
 	public Integer getUserId() {
 		return this.userId;
@@ -129,12 +153,20 @@ public class User implements java.io.Serializable {
 		this.lastName = lastName;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Column(name = "gender")
-	public Integer getGender() {
+	public String getGender() {
 		return this.gender;
 	}
 
-	public void setGender(Integer gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
@@ -147,7 +179,7 @@ public class User implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "enabled", nullable = false, columnDefinition = "BIT", length = 1)
+	//@Column(name = "enabled", nullable = false, columnDefinition = "BIT", length = 1)
 	public boolean isEnabled() {
 		return this.enabled;
 	}

@@ -1,8 +1,5 @@
 package edu.mum.cs544.Domain;
 
-
-
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,33 +7,36 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "item", catalog = "cs544db")
 public class Item {
 
-	
 	@Id
 	@GeneratedValue
 	private int itemId;
+	@NotNull
 	private String itemName;
 	private String itemDescription;
+	@Min(0)
 	private double itemPrice;
-	@ElementCollection
 	@Enumerated(EnumType.STRING)
 	private ItemCategory itemCategory;
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private ItemStatus itemStatus;
+	@Min(0)
 	private int itemQuantity;
-	// lend /rent for (x) # of days
-	private int numofDays;
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User owner;
+	
+	@Lob
+	private byte[] itemImage;
 
 	public Item() {
 
@@ -98,14 +98,6 @@ public class Item {
 		this.itemQuantity = itemQuantity;
 	}
 
-	public int getNumofDays() {
-		return numofDays;
-	}
-
-	public void setNumofDays(int numofDays) {
-		this.numofDays = numofDays;
-	}
-
 	public User getOwner() {
 		return owner;
 	}
@@ -114,5 +106,14 @@ public class Item {
 		this.owner = owner;
 	}
 
-}
+	public byte[] getItemImage() {
+		return itemImage;
+	}
 
+	public void setItemImage(byte[] itemImage) {
+		this.itemImage = itemImage;
+	}
+	
+	
+
+}

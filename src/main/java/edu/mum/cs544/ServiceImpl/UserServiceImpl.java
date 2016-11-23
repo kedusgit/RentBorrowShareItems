@@ -13,7 +13,6 @@ import edu.mum.cs544.Domain.User;
 import edu.mum.cs544.Repository.UserRepository;
 import edu.mum.cs544.Service.UserService;
 
-
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -21,26 +20,40 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-  	public void save(User user) {
+	public void save(User user) {
 
-  		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();   		
-  		String encodedPassword = passwordEncoder.encode(user.getPassword());
-  		user.setPassword(encodedPassword);
-  		
-  		userRepository.save(user);
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+
+		userRepository.save(user);
 	}
 
 	@Override
-	public List<User> findAll() {	
+	public List<User> findAll() {
 		return (List<User>) userRepository.findAll();
 	}
 
 	@Override
-	public User findByUsername(String username) {
+	public List<User> findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
+	@Override
+	public void deleteUser(Integer id) {
+		userRepository.delete(id);
+
+	}
+
+	@Override
+	public User getLoggedInUser(String username) {
+		return userRepository.findByusername(username);
+	}
+
+	@Override
+	public User findByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findByUserId(userId);
 	}
 
-
-	}
-
+}

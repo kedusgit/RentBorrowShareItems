@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Entity
 @Table(name = "record", catalog = "cs544db")
@@ -27,8 +31,13 @@ public class Record implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "itemId")
 	private Item itemId;
+	private int itemQuantity;
+	private int numOfDays;
+	@Temporal(value = TemporalType.DATE)
 	private Date startDate;
+	@Temporal(value = TemporalType.DATE)
 	private Date dueDate;
+	@Temporal(value = TemporalType.DATE)
 	private Date endDate;
 
 	public Record() {
@@ -81,5 +90,21 @@ public class Record implements Serializable {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public int getItemQuantity() {
+		return itemQuantity;
+	}
+
+	public void setItemQuantity(int itemQuantity) {
+		this.itemQuantity = itemQuantity;
+	}
+
+	public int getNumOfDays() {
+		return numOfDays;
+	}
+
+	public void setNumOfDays(int numOfDays) {
+		this.numOfDays = numOfDays;
 	}
 }

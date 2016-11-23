@@ -1,5 +1,8 @@
 package edu.mum.cs544.ServiceImpl;
 
+import static org.assertj.core.api.Assertions.useRepresentation;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -12,61 +15,86 @@ import edu.mum.cs544.Service.ItemService;
 
 @Service
 @Transactional
-public class ItemServiceImpl  implements ItemService {
+public class ItemServiceImpl implements ItemService {
 
-	
-		@Autowired
-		private ItemRepository itemRepository;
+	@Autowired
+	private ItemRepository itemRepository;
 
-		@Override
-		public List<Item> getAllitems() {
-			
+	@Override
+	public List<Item> getAllitems() {
 		return itemRepository.findAll();
-		}
+	}
 
-		@Override
-		public void saveOrUpdateItem(Item item) {
-			
-			itemRepository.save(item);
-		}
-	
+	@Override
+	public void saveOrUpdateItem(Item item) {
+		itemRepository.save(item);
+	}
+
+	@Override
+	public List<Item> findAllByStatus(String status) {
+
+		return itemRepository.findAllByItemStatus(status);
+	}
+
+	@Override
+	public void addItem(Item newItem) {
+		itemRepository.save(newItem);
+
+	}
+
+	@Override
+	public Item getItemId(Integer id) {
+
+		return itemRepository.findItemByItemId(id);
+	}
+
+	@Override
+	public List<Item> findByNameLike(String searchText) {
+
+		return itemRepository.findByItemNameLike(searchText);
+	}
+
+	@Override
+	public List<Item> getIByuserId(Integer userId) {
+
+		return itemRepository.findAllByOwner(userId);
+	}
+
+	@Override
+	public List<Item> getItemByItemCatagory(ItemCategory catagory) {
+		// TODO Auto-generated method stub
+		return itemRepository.findAllByItemCategory(catagory);
+	}
+
+	@Override
+	public Item findById(int itemId) {
+		return itemRepository.findByItemId(itemId);
+	}
+
+	@Override
+	public List<Item> findByCategoryAndNameLike(ItemCategory category, String searchText) {
+		return itemRepository.findByItemCategoryAndItemNameLike(category, searchText);
+	}
+
+	@Override
+	public void deleteitem(int itemId) {
+		itemRepository.delete(Integer.valueOf(itemId));
+	}
+
+	@Override
+	public void save(Item item) {
+		// TODO Auto-generated method stub
 		
-		@Override
-		public List<Item> findAllByStatus(String status) {
-		
-			return itemRepository.findAllByItemStatus(status);
-		}
+	}
 
-		@Override
-		public void addItem(Item newItem) {
-			itemRepository.save(newItem);
-			
-		}
+	@Override
+	public List<Item> getAllOwnItems(int userId) {
+		return itemRepository.findAllByOwnerUserId(userId);
+	}
 
-		@Override
-		public Item getItemId(Integer id) {
-			
-			return itemRepository.findItemByItemId(id);
-		}
-
-		
-
-		@Override
-		public List<Item> findByNameLike(String searchText) {
-			
-			return itemRepository.findByItemNameLike(searchText);
-		}
-
-		@Override
-		public List<Item> getIByuserId(Integer userId) {
-			
-			return itemRepository.findAllByOwner(userId);
-		}
-
-		@Override
-		public List<Item> getItemByItemCatagory(ItemCategory catagory) {
-			// TODO Auto-generated method stub
-			return itemRepository.findAllByItemCategory(catagory);
-		}
+	@Override
+	public List<Item> findAllItemsExceptOwner(int ownerId) {
+		return itemRepository.findAllByOwnerUserIdNot(ownerId);
+	}
 
 }

@@ -1,12 +1,14 @@
 package edu.mum.cs544;
 
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -18,27 +20,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 
-	  auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery(
-			"select username, password, enabled from user where username=?")
-		.authoritiesByUsernameQuery(
-			"select u.username, authority role from authorities a, user u where a.user_id = u.user_id u.username=?");
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder())
+				.usersByUsernameQuery("select  username, password ,enabled as active from  user  where username=?")
+				.authoritiesByUsernameQuery("select  username, role from user  where username=?");
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	 http.authorizeRequests().antMatchers("/","/login", "/item/search", "/item/detail/*").permitAll();
-
-	  http.authorizeRequests()
-		.antMatchers("/**").access("hasRole('ROLE_USER')")
-		.and()
-		  .formLogin().loginPage("/login").failureUrl("/login?error")
-		  .usernameParameter("username").passwordParameter("password")
-		.and()
-		  .logout().logoutSuccessUrl("/login?logout")
-		.and()
-		  .exceptionHandling().accessDeniedPage("/403")
-		.and()
-		  .csrf();
+		http.authorizeRequests()
+				.antMatchers("/css/**", "/js/**", "/", "/record/borrow/**", "/record/borrow/addItem/**",
+						"/record/**", "/login", "/home", "/resources/**", "/item/**",
+						"/item/detail/*")
+				.permitAll().antMatchers("/item/add", "/logout").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+				.antMatchers("/item/all").permitAll().antMatchers("/register").permitAll()
+				// .antMatchers("/item/add").hasAuthority("ROLE_ADMIN")
+				// .antMatchers("/item/add").hasRole("ROLE_ADMIN")
+				.anyRequest().authenticated().and().formLogin().loginPage("/login")
+				// .successForwardUrl("/item/all")
+				.successForwardUrl("/postLogin").permitAll();
+		http.csrf().disable();
 	}
 }
