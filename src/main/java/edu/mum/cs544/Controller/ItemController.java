@@ -1,16 +1,9 @@
 package edu.mum.cs544.Controller;
 
-import static org.assertj.core.api.Assertions.useDefaultRepresentation;
-import static org.mockito.Matchers.intThat;
-
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.Principal;
-import java.text.SimpleDateFormat;
+
 import java.util.Arrays;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -18,9 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.h2.engine.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,7 +32,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.cs544.Domain.Item;
@@ -49,7 +40,6 @@ import edu.mum.cs544.Domain.ItemStatus;
 import edu.mum.cs544.Domain.Record;
 import edu.mum.cs544.Domain.User;
 import edu.mum.cs544.Service.ItemService;
-import edu.mum.cs544.Service.UserService;
 
 @Controller
 @RequestMapping("/item")
@@ -61,31 +51,28 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 
-	@Autowired
-	private UserService userService;
-
 	@RequestMapping(value = { "", "/all" })
 	public String list(Model model, HttpSession session) {
 		List<ItemCategory> itemCategories = Arrays.asList(ItemCategory.values());
-		int ownerId = ((User)session.getAttribute("user")).getUserId();
+		int ownerId = ((User) session.getAttribute("user")).getUserId();
 		model.addAttribute("itemCategories", itemCategories);
 		model.addAttribute("items", itemService.findAllItemsExceptOwner(ownerId));
 		return "items";
 	}
-	
+
 	@RequestMapping(value = "/ownItems", method = RequestMethod.GET)
 	public String getOwnItems(Model model, HttpSession session) {
-		int userId = (int)session.getAttribute("userId");
+		int userId = (int) session.getAttribute("userId");
 		List<ItemCategory> itemCategories = Arrays.asList(ItemCategory.values());
 		model.addAttribute("itemCategories", itemCategories);
-		System.out.println("size of own items= "+ itemService.getAllOwnItems(userId).size());
+		System.out.println("size of own items= " + itemService.getAllOwnItems(userId).size());
 		model.addAttribute("items", itemService.getAllOwnItems(userId));
 		return "ownItems";
 	}
 
 	@RequestMapping("/{itemCategory}")
 	public @ResponseBody Item getItemById(@PathVariable("itemCategory") ItemCategory itemCategory, Model model) {
-		// ItemCategory newType = ItemCategory.ACCESSORIES;
+		
 		Item item = (Item) itemService.getItemByItemCatagory(itemCategory);
 		model.addAttribute("item", item);
 		return item;
@@ -129,7 +116,7 @@ public class ItemController {
 		}
 
 		try {
-			User user = (User)session.getAttribute("user");	
+			User user = (User) session.getAttribute("user");
 			newItem.setOwner(user);
 			itemService.addItem(newItem);
 		} catch (Exception up) {
@@ -167,7 +154,7 @@ public class ItemController {
 
 	@RequestMapping(value = "/editItem", method = RequestMethod.POST)
 	public String editResourceFormProcess(Model model, @Valid @ModelAttribute("item") Item item,
-			HttpServletRequest request, RequestAttributes redirectAttributes) {		
+			HttpServletRequest request, RequestAttributes redirectAttributes) {
 		Item editedItem = itemService.getItemId(item.getItemId());
 		editedItem.setItemName(item.getItemName());
 		editedItem.setItemDescription(item.getItemDescription());
@@ -200,19 +187,18 @@ public class ItemController {
 		model.addAttribute("items", items);
 		return "searchResults";
 	}
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		// SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		// dateFormat.setLenient(true);
-
-		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
-	}
+	
 
 	@RequestMapping("/delete/{itemId}")
 	public String deleteitem(@PathVariable int itemId, Model model, HttpServletRequest request) throws Throwable {
 		itemService.deleteitem(itemId);
 		return "redirect:/item/ownItems";
 	}
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+	}
+
 
 }
